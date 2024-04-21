@@ -1,4 +1,4 @@
-# simple-crud-django
+# App Medicación Segura
 Simple CRUD con django, utilizando vistas basadas en funciones y autentificacion 
 
 
