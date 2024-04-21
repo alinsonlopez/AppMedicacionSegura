@@ -13,17 +13,17 @@ medicines_patterns = [
     path('<int:pk>/eliminar/', views.medicine_delete, name='medicines-delete')
 ]
 
-categories_patterns = [
-    path('', views.category_list, name='category-list'),
-    path('<int:pk>/', views.category_detail, name='category-detail'),
-    path('crear/', views.category_create, name='category-create'),
-    path('<int:pk>/editar/', views.category_update, name='category-edit'),
-    path('<int:pk>/eliminar/', views.medicine_delete, name='category-delete')
+symptoms_patterns = [
+    path('', views.symptom_list, name='symptom-list'),
+    path('<int:pk>/', views.symptom_detail, name='symptom-detail'),
+    path('crear/', views.symptom_create, name='symptom-create'),
+    path('<int:pk>/editar/', views.symptom_update, name='symptom-edit'),
+    path('<int:pk>/eliminar/', views.symptom_delete, name='symptom-delete')
 ]
 
 urlpatterns = [
     path('', views.log_in, name='log-in'),
     path('log-out/', views.log_out, name='log-out'),
-    path('categorias/', include(categories_patterns)),
+    path('sintomas/', include(symptoms_patterns)),
     path('medicamentos/', include(medicines_patterns))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

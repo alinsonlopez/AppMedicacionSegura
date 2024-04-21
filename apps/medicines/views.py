@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from .models import Medicines, Categories
-from .forms import MedicinesForm, LoginForm, CategoriesForm
+from .models import Medicines, Symptoms
+from .forms import MedicinesForm, LoginForm, SymptomsForm
 
 
 # Create your views here.
@@ -104,31 +104,31 @@ def medicine_delete(request, **kwargs):
 
 
 @login_required
-def category_list(request):
-    categories = Categories.objects.all()
-    return render(request, 'medicines/category/category_list.html', {'categories': categories})
+def symptom_list(request):
+    symptoms = Symptoms.objects.all()
+    return render(request, 'medicines/symptom/symptom_list.html', {'symptoms': symptoms})
 
 @login_required
-def category_detail(request, pk):
+def symptom_detail(request, pk):
     try:
         # recuperamos el objeto mediante la
         # API de abstracción de base de datos
         # que ofrece Django
-        m = Categories.objects.get(pk=pk)
-    except Categories.DoesNotExist:
-        raise Http404("Esta categoria no existe")
+        m = Symptoms.objects.get(pk=pk)
+    except Symptoms.DoesNotExist:
+        raise Http404("Este sintoma no existe")
 
     # version con shortcuts de django, equivalente al codigo anterior
     # m = get_object_or_404(Medicines, pk=pk)
-    return render(request, 'medicines/categories/detail.html', {'medicine': m})
+    return render(request, 'medicines/symptom/detail.html', {'medicine': m})
 
 
 @login_required
-def category_create(request, **kwargs):
+def symptom_create(request, **kwargs):
     # Intanciamos la clase form
     # si el diccionario request.POST no esta vacio
     # la instancia se creara con dichos datos, sino estara vacia
-    form = CategoriesForm(
+    form = SymptomsForm(
         request.POST or None,
         request.FILES or None
     )
@@ -139,26 +139,26 @@ def category_create(request, **kwargs):
         form.save()
         # redirigir a una nueva URL
         return redirect('medicines:home')
-    return render(request, 'medicines/category/form.html', {'form': form})
+    return render(request, 'medicines/symptom/form.html', {'form': form})
 
 
 @login_required
-def category_update(request, **kwargs):
+def symptom_update(request, **kwargs):
     # recuperamos el objeto a actualizar
-    categories = Categories.objects.get(pk=kwargs.get('pk'))
+    symptoms = Symptoms.objects.get(pk=kwargs.get('pk'))
     # inicializamos el formulario con el objeto recuperado
-    form = MedicinesForm(
+    form = SymptomsForm(
         request.POST or None,
-        instance=categories
+        instance=symptoms
     )
     if request.POST and form.is_valid():
         form.save()
-        return redirect('medicines:home')
-    return render(request, 'medicines/category/form.html', {'form': form})
+        return redirect('medicines:symptom-list')
+    return render(request, 'medicines/symptom/form.html', {'form': form})
 
 
 @login_required
-def category_delete(request, **kwargs):
-    categories = Categories.objects.get(pk=kwargs.get('pk'))
-    categories.delete()
-    return redirect('medicines:home')
+def symptom_delete(request, **kwargs):
+    symptoms = Symptoms.objects.get(pk=kwargs.get('pk'))
+    symptoms.delete()
+    return redirect('medicines:symptom-list')

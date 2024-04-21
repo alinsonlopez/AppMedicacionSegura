@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Categories, Medicines
+from .models import Symptoms, Medicines
 
 
 # Register your models here.
 
-@admin.register(Categories, Medicines)
+@admin.register(Symptoms, Medicines)
 class BaseAdminRegister(admin.ModelAdmin):
     pass

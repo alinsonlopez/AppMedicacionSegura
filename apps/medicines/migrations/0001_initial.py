@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Categories',
+            name='Symptoms',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=150, verbose_name='Nombre')),
@@ -22,8 +22,8 @@ class Migration(migrations.Migration):
                 ('minimum_age', models.IntegerField(verbose_name='Edad Minima')),
             ],
             options={
-                'verbose_name': 'Categoria',
-                'verbose_name_plural': 'Categorias',
+                'verbose_name': 'Sintoma',
+                'verbose_name_plural': 'Sintomas',
             },
         ),
         migrations.CreateModel(
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(max_length=256, verbose_name='Descripcion')),
                 ('image', models.ImageField(upload_to='medicines', verbose_name='Imagen')),
                 ('release_date', models.DateField(verbose_name='Fecha de publicacion')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='medicines.Categories', verbose_name='Categoria')),
+                ('symptom', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='medicines.Symptoms', verbose_name='Sintoma')),
             ],
             options={
                 'verbose_name': 'Pelicula',

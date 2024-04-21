@@ -2,14 +2,14 @@
 {% block main-content %}
 <div class="row">
     <div class="col s12">
-        <a class="waves-effect waves-light btn right light-blue darken-1" href="{% url 'medicines:category-create' %}"><i
-                class="material-icons left">add</i>Agregar nueva categoria</a>
+        <a class="waves-effect waves-light btn right light-blue darken-1" href="{% url 'medicines:symptom-create' %}"><i
+                class="material-icons left">add</i>Agregar sintoma</a>
     </div>
     <div class="row">
         <div class="col s12">
-            {% if not categories %}
-            <div class="card-panel red">
-                <span class="white-text">No hay registros actualmente</span>
+            {% if not symptoms %}
+            <div class="card-panel orange" style="text-align: center;">
+                <span class="white-text ">No hay registros actualmente</span>
             </div>
             {% else %}
             <table class="striped centered">
@@ -22,12 +22,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for category_item in categories %}
+                    {% for symptom_item in symptoms %}
                     <tr>
-                        <td width="20%">{{ category_item.name }}</td>
-                        <td>{{ category_item.minimum_age }}</td>
-                        <td>{{ category_item.created | timesince }}</td>
-                        <td>{{ category_item.updated | timesince }}</td>
+                        <td width="20%">{{ symptom_item.name }}</td>
+                        <td>{{ symptom_item.minimum_age }}</td>
+                        <td>{{ symptom_item.created | timesince }}</td>
+                        <td>{{ symptom_item.updated | timesince }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

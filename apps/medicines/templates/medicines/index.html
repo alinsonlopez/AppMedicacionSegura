@@ -1,46 +1,46 @@
 {% extends 'medicines/fragments/base.html' %}
 {% block main-content %}
-    <div class="row">
-        <div class="col s12">
-            <a class="waves-effect waves-light btn right light-blue darken-1" href="{% url 'medicines:medicines-create' %}"><i
-                    class="material-icons left">add</i>Agregar nuevo medicamento</a>
-        </div>
+<div class="row">
+    <div class="col s12">
+        <a class="waves-effect waves-light btn right light-blue darken-1"
+            href="{% url 'medicines:medicines-create' %}"><i class="material-icons left">add</i>Agregar nuevo
+            medicamento</a>
     </div>
-    <div class="row">
-        <div class="col s12">
-            {% if not medicines %}
-                <div class="card-panel red">
-                    <span class="white-text">No hay ningun medicamento actualmente</span>
-                </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        {% if not medicines %}
+        <div class="card-panel orange" style="text-align: center;">
+            <span class="white-text ">No hay ningun medicamento actualmente</span>
             {% else %}
-                <table class="striped centered">
-                    <thead>
+            <table class="striped centered">
+                <thead>
                     <tr>
                         <th width="20%">Nombre</th>
                         <th>Descripcion</th>
                         <th>Fecha de lanzamiento</th>
                         <th width="20%">Opciones</th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     {% for medicine in medicines %}
-                        <tr>
-                            <td width="20%">{{ medicine.name }}</td>
-                            <td>{{ medicine.description | truncatechars:120 }}</td>
-                            <td>{{ medicine.release_date }}</td>
-                            <td width="20%">
-                                <a class="btn-floating btn-small waves-effect waves-light red"
-                                   href="{{ medicine.get_edit_url }}"><i class="material-icons">edit</i></a>
-                                <a class="btn-floating btn-small waves-effect waves-light blue"
-                                   href="{{ medicine.get_delete_url }}"><i class="material-icons">delete</i></a>
-                                <a class="btn-floating btn-small waves-effect waves-light green"
-                                   href="{{ medicine.get_detail_url }}"><i class="material-icons">visibility</i></a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td width="20%">{{ medicine.name }}</td>
+                        <td>{{ medicine.description | truncatechars:120 }}</td>
+                        <td>{{ medicine.release_date }}</td>
+                        <td width="20%">
+                            <a class="btn-floating btn-small waves-effect waves-light red"
+                                href="{{ medicine.get_edit_url }}"><i class="material-icons">edit</i></a>
+                            <a class="btn-floating btn-small waves-effect waves-light blue"
+                                href="{{ medicine.get_delete_url }}"><i class="material-icons">delete</i></a>
+                            <a class="btn-floating btn-small waves-effect waves-light green"
+                                href="{{ medicine.get_detail_url }}"><i class="material-icons">visibility</i></a>
+                        </td>
+                    </tr>
                     {% endfor %}
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
             {% endif %}
         </div>
     </div>
-{% endblock %}
+    {% endblock %}

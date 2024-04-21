@@ -16,29 +16,29 @@ class BaseName(models.Model):
         return self.name
 
 
-class Categories(BaseName):
-    minimum_age = models.IntegerField(verbose_name='Edad Minima')
-
+class Symptoms(BaseName):
+   
     class Meta:
-        verbose_name = 'Categoria'
-        verbose_name_plural = 'Categorias'
+        verbose_name = 'Sintoma'
+        verbose_name_plural = 'Sintomas'
 
     def get_edit_url(self):
-        return reverse_lazy('medicines:categories-edit', kwargs={'pk': self.pk})
+        return reverse_lazy('medicines:symptoms-edit', kwargs={'pk': self.pk})
 
     def get_delete_url(self):
-        return reverse_lazy('medicines:categories-delete', kwargs={'pk': self.pk})
+        return reverse_lazy('medicines:symptoms-delete', kwargs={'pk': self.pk})
 
     def get_detail_url(self):
-        return reverse_lazy('medicines:categories-detail', kwargs={'pk': self.pk})
+        return reverse_lazy('medicines:symptoms-detail', kwargs={'pk': self.pk})
 
 
 
 class Medicines(BaseName):
-    description = models.CharField(max_length=256, verbose_name='Descripcion')
-    image = models.ImageField(upload_to='medicines', verbose_name='Imagen')
-    release_date = models.DateField(verbose_name='Fecha de publicacion')
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE, verbose_name='Categoria')
+    description = models.CharField(max_length=256, verbose_name='Descripcion del medicamento')
+    brand = models.CharField(max_length=10, verbose_name='Marca')
+    laboratory = models.CharField(max_length=10, verbose_name='Laboratorio')
+    image = models.ImageField(upload_to='medicines', verbose_name='Imagen', blank=True)
+    symptom = models.ManyToManyField(Symptoms, verbose_name='Sintoma')
 
     class Meta:
         verbose_name = 'Medicamento'

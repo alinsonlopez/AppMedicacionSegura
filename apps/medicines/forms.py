@@ -1,5 +1,5 @@
 from django import forms
-from .models import Medicines, Categories
+from .models import Medicines, Symptoms
 
 
 class MedicinesForm(forms.ModelForm):
@@ -7,9 +7,9 @@ class MedicinesForm(forms.ModelForm):
         model = Medicines
         fields = '__all__'
 
-class CategoriesForm(forms.ModelForm):
+class SymptomsForm(forms.ModelForm):
     class Meta:
-        model = Categories
+        model = Symptoms
         fields = '__all__'
 
 
