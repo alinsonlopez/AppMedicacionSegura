@@ -18,7 +18,9 @@
                     <tr>
                         <th width="20%">Nombre</th>
                         <th>Descripcion</th>
-                        <th>Fecha de lanzamiento</th>
+                        <th>Marca</th>
+                        <th>Laboratorio</th>
+                        <th>Sintomas</th>
                         <th width="20%">Opciones</th>
                     </tr>
                 </thead>
@@ -27,7 +29,12 @@
                     <tr>
                         <td width="20%">{{ medicine.name }}</td>
                         <td>{{ medicine.description | truncatechars:120 }}</td>
-                        <td>{{ medicine.release_date }}</td>
+                        <td>{{ medicine.brand }}</td>
+                        <td>{{ medicine.laboratory }}</td>
+                        <td> {% for symptom in medicine.symptom.all %}
+                            <ul>{{ symptom.name }}</ul>
+                            {% endfor %} 
+                        </td>
                         <td width="20%">
                             <a class="btn-floating btn-small waves-effect waves-light red"
                                 href="{{ medicine.get_edit_url }}"><i class="material-icons">edit</i></a>

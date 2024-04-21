@@ -23,8 +23,10 @@
     {% endfor %}
 
     <div class="row">
-        <button class="btn waves-effect waves-light right red darken-1" type="submit" name="action">Entrar
+        <button class="btn waves-effect waves-light right light-blue darken-1" type="submit" name="action">Guardar
             <i class="material-icons right">send</i>
         </button>
+        <a class="btn waves-effect waves-light left light-blue darken-1" href="{{ request.META.HTTP_REFERER }}">Volver</a>
+
     </div>
 </form>

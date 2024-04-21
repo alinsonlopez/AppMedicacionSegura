@@ -114,13 +114,11 @@ def symptom_detail(request, pk):
         # recuperamos el objeto mediante la
         # API de abstracción de base de datos
         # que ofrece Django
-        m = Symptoms.objects.get(pk=pk)
+        s = Symptoms.objects.get(pk=pk)
     except Symptoms.DoesNotExist:
         raise Http404("Este sintoma no existe")
 
-    # version con shortcuts de django, equivalente al codigo anterior
-    # m = get_object_or_404(Medicines, pk=pk)
-    return render(request, 'medicines/symptom/detail.html', {'medicine': m})
+    return render(request, 'medicines/symptom/detail.html', {'symptoms': s})
 
 
 @login_required
@@ -138,27 +136,28 @@ def symptom_create(request, **kwargs):
         # Guardamos el objeto
         form.save()
         # redirigir a una nueva URL
-        return redirect('medicines:home')
+        return redirect('medicines:symptoms-list')
     return render(request, 'medicines/symptom/form.html', {'form': form})
 
 
 @login_required
 def symptom_update(request, **kwargs):
     # recuperamos el objeto a actualizar
-    symptoms = Symptoms.objects.get(pk=kwargs.get('pk'))
+    symptom = Symptoms.objects.get(pk=kwargs.get('pk'))
     # inicializamos el formulario con el objeto recuperado
     form = SymptomsForm(
         request.POST or None,
-        instance=symptoms
+        instance=symptom
     )
     if request.POST and form.is_valid():
         form.save()
-        return redirect('medicines:symptom-list')
+        return redirect('medicines:symptoms-list')
     return render(request, 'medicines/symptom/form.html', {'form': form})
 
 
 @login_required
 def symptom_delete(request, **kwargs):
-    symptoms = Symptoms.objects.get(pk=kwargs.get('pk'))
-    symptoms.delete()
-    return redirect('medicines:symptom-list')
+    symptom = Symptoms.objects.get(pk=kwargs.get('pk'))
+    print(symptom)
+    symptom.delete()
+    return redirect('medicines:symptoms-list')

@@ -17,7 +17,8 @@ class BaseName(models.Model):
 
 
 class Symptoms(BaseName):
-   
+    description = models.CharField(max_length=256, verbose_name='Descripcion del sintoma', blank=True)
+    
     class Meta:
         verbose_name = 'Sintoma'
         verbose_name_plural = 'Sintomas'
@@ -38,7 +39,7 @@ class Medicines(BaseName):
     brand = models.CharField(max_length=10, verbose_name='Marca')
     laboratory = models.CharField(max_length=10, verbose_name='Laboratorio')
     image = models.ImageField(upload_to='medicines', verbose_name='Imagen', blank=True)
-    symptom = models.ManyToManyField(Symptoms, verbose_name='Sintoma')
+    symptom = models.ManyToManyField(Symptoms, verbose_name='Sintoma', blank=True)
 
     class Meta:
         verbose_name = 'Medicamento'

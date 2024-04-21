@@ -2,7 +2,7 @@
 {% block main-content %}
 <div class="row">
     <div class="col s12">
-        <a class="waves-effect waves-light btn right light-blue darken-1" href="{% url 'medicines:symptom-create' %}"><i
+        <a class="waves-effect waves-light btn right light-blue darken-1" href="{% url 'medicines:symptoms-create' %}"><i
                 class="material-icons left">add</i>Agregar sintoma</a>
     </div>
     <div class="row">
@@ -16,7 +16,7 @@
                 <thead>
                     <tr>
                         <th width="20%">Nombre</th>
-                        <th>Edad minima</th>
+                        <th>Descripcion</th>
                         <th>Creacion</th>
                         <th>Ultima actualizacion</th>
                     </tr>
@@ -25,9 +25,17 @@
                     {% for symptom_item in symptoms %}
                     <tr>
                         <td width="20%">{{ symptom_item.name }}</td>
-                        <td>{{ symptom_item.minimum_age }}</td>
+                        <td width="20%">{{ symptom_item.description }}</td>
                         <td>{{ symptom_item.created | timesince }}</td>
                         <td>{{ symptom_item.updated | timesince }}</td>
+                        <td width="20%">
+                            <a class="btn-floating btn-small waves-effect waves-light red"
+                                href="{{ symptom_item.get_edit_url }}"><i class="material-icons">edit</i></a>
+                            <a class="btn-floating btn-small waves-effect waves-light blue"
+                                href="{{ symptom_item.get_delete_url }}"><i class="material-icons">delete</i></a>
+                            <a class="btn-floating btn-small waves-effect waves-light green"
+                                href="{{ symptom_item.get_detail_url }}"><i class="material-icons">visibility</i></a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

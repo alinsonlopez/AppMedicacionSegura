@@ -14,11 +14,11 @@ medicines_patterns = [
 ]
 
 symptoms_patterns = [
-    path('', views.symptom_list, name='symptom-list'),
-    path('<int:pk>/', views.symptom_detail, name='symptom-detail'),
-    path('crear/', views.symptom_create, name='symptom-create'),
-    path('<int:pk>/editar/', views.symptom_update, name='symptom-edit'),
-    path('<int:pk>/eliminar/', views.symptom_delete, name='symptom-delete')
+    path('', views.symptom_list, name='symptoms-list'),
+    path('<int:pk>/', views.symptom_detail, name='symptoms-detail'),
+    path('crear/', views.symptom_create, name='symptoms-create'),
+    path('<int:pk>/editar/', views.symptom_update, name='symptoms-edit'),
+    path('<int:pk>/eliminar/', views.symptom_delete, name='symptoms-delete')
 ]
 
 urlpatterns = [
