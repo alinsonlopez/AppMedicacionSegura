@@ -1,10 +1,15 @@
 from django import forms
-from .models import Medicines
+from .models import Medicines, Categories
 
 
 class MedicinesForm(forms.ModelForm):
     class Meta:
         model = Medicines
+        fields = '__all__'
+
+class CategoriesForm(forms.ModelForm):
+    class Meta:
+        model = Categories
         fields = '__all__'
 
 

@@ -23,6 +23,16 @@ class Categories(BaseName):
         verbose_name = 'Categoria'
         verbose_name_plural = 'Categorias'
 
+    def get_edit_url(self):
+        return reverse_lazy('medicines:categories-edit', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse_lazy('medicines:categories-delete', kwargs={'pk': self.pk})
+
+    def get_detail_url(self):
+        return reverse_lazy('medicines:categories-detail', kwargs={'pk': self.pk})
+
+
 
 class Medicines(BaseName):
     description = models.CharField(max_length=256, verbose_name='Descripcion')
@@ -31,7 +41,7 @@ class Medicines(BaseName):
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, verbose_name='Categoria')
 
     class Meta:
-        verbose_name = 'Pelicula'
+        verbose_name = 'Medicamento'
         verbose_name_plural = 'Medicamentos'
 
     def get_edit_url(self):

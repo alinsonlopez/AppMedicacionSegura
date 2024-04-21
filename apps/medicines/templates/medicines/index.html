@@ -2,7 +2,7 @@
 {% block main-content %}
     <div class="row">
         <div class="col s12">
-            <a class="waves-effect waves-light btn right red darken-1" href="{% url 'medicines:medicines-create' %}"><i
+            <a class="waves-effect waves-light btn right light-blue darken-1" href="{% url 'medicines:medicines-create' %}"><i
                     class="material-icons left">add</i>Agregar nuevo medicamento</a>
         </div>
     </div>
@@ -23,18 +23,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for movie in medicines %}
+                    {% for medicine in medicines %}
                         <tr>
-                            <td width="20%">{{ movie.name }}</td>
-                            <td>{{ movie.description | truncatechars:120 }}</td>
-                            <td>{{ movie.release_date }}</td>
+                            <td width="20%">{{ medicine.name }}</td>
+                            <td>{{ medicine.description | truncatechars:120 }}</td>
+                            <td>{{ medicine.release_date }}</td>
                             <td width="20%">
                                 <a class="btn-floating btn-small waves-effect waves-light red"
-                                   href="{{ movie.get_edit_url }}"><i class="material-icons">edit</i></a>
+                                   href="{{ medicine.get_edit_url }}"><i class="material-icons">edit</i></a>
                                 <a class="btn-floating btn-small waves-effect waves-light blue"
-                                   href="{{ movie.get_delete_url }}"><i class="material-icons">delete</i></a>
+                                   href="{{ medicine.get_delete_url }}"><i class="material-icons">delete</i></a>
                                 <a class="btn-floating btn-small waves-effect waves-light green"
-                                   href="{{ movie.get_detail_url }}"><i class="material-icons">visibility</i></a>
+                                   href="{{ medicine.get_detail_url }}"><i class="material-icons">visibility</i></a>
                             </td>
                         </tr>
                     {% endfor %}
