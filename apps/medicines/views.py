@@ -81,18 +81,18 @@ def medicine_create(request, **kwargs):
     return render(request, 'medicines/form.html', {'form': form})
 
 
-@login_required
 def medicine_update(request, **kwargs):
     # recuperamos el objeto a actualizar
     medicine = Medicines.objects.get(pk=kwargs.get('pk'))
     # inicializamos el formulario con el objeto recuperado
-    form = MedicinesForm(
-        request.POST or None,
-        instance=medicine
-    )
-    if request.POST and form.is_valid():
-        form.save()
-        return redirect('medicines:home')
+    if request.method == 'POST':
+        form = MedicinesForm(request.POST, request.FILES, instance=medicine)
+        if form.is_valid():
+            form.save()
+            return redirect('medicines:home')
+    else:
+        # Si no es una solicitud POST, simplemente muestra el formulario con los datos existentes
+        form = MedicinesForm(instance=medicine)
     return render(request, 'medicines/form.html', {'form': form})
 
 
