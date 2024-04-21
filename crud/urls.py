@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Registrar las URLs de tu aplicación aquí
-    path('', include('apps.movies.urls')),
+    path('', include('apps.medicines.urls')),
 ]
 
 # Para servir archivos estáticos en desarrollo

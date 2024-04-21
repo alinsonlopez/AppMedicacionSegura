@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from .models import Movies, Categories
-from .forms import MoviesForm, LoginForm
+from .models import Medicines, Categories
+from .forms import MedicinesForm, LoginForm
 
 
 # Create your views here.
@@ -26,25 +26,25 @@ def log_in(request):
                 # Adjuntar usuario autenticado a la sesión actual
                 login(request, user)
                 # Redireccionar a una vista utilizando el nombre de la url
-                return redirect('movies:home')
+                return redirect('medicines:home')
             else:
                 context['message'] = 'El usuario ha sido desactivado'
         else:
             context['message'] = 'Usuario o contraseña incorrecta'
-    return render(request, 'movies/login.html', context)
+    return render(request, 'medicines/login.html', context)
 
 
 # decorador para restringir el acceso a solo usuarios autenticados
 @login_required
 def log_out(request):
     logout(request)
-    return redirect('movies:log-in')
+    return redirect('medicines:log-in')
 
 
 @login_required
 def movie_list(request):
-    movies = Movies.objects.all()
-    return render(request, 'movies/index.html', {'movies': movies})
+    medicines = Medicines.objects.all()
+    return render(request, 'medicines/index.html', {'medicines': medicines})
 
 
 @login_required
@@ -53,13 +53,13 @@ def movie_detail(request, pk):
         # recuperamos el objeto mediante la
         # API de abstracción de base de datos
         # que ofrece Django
-        m = Movies.objects.get(pk=pk)
-    except Movies.DoesNotExist:
+        m = Medicines.objects.get(pk=pk)
+    except Medicines.DoesNotExist:
         raise Http404("Esta pelicuala no existe")
 
     # version con shortcuts de django, equivalente al codigo anterior
-    # m = get_object_or_404(Movies, pk=pk)
-    return render(request, 'movies/detail.html', {'movie': m})
+    # m = get_object_or_404(Medicines, pk=pk)
+    return render(request, 'medicines/detail.html', {'movie': m})
 
 
 @login_required
@@ -67,7 +67,7 @@ def movie_create(request, **kwargs):
     # Intanciamos la clase form
     # si el diccionario request.POST no esta vacio
     # la instancia se creara con dichos datos, sino estara vacia
-    form = MoviesForm(
+    form = MedicinesForm(
         request.POST or None,
         request.FILES or None
     )
@@ -77,33 +77,33 @@ def movie_create(request, **kwargs):
         # Guardamos el objeto
         form.save()
         # redirigir a una nueva URL
-        return redirect('movies:home')
-    return render(request, 'movies/form.html', {'form': form})
+        return redirect('medicines:home')
+    return render(request, 'medicines/form.html', {'form': form})
 
 
 @login_required
 def movie_update(request, **kwargs):
     # recuperamos el objeto a actualizar
-    movie = Movies.objects.get(pk=kwargs.get('pk'))
+    movie = Medicines.objects.get(pk=kwargs.get('pk'))
     # inicializamos el formulario con el objeto recuperado
-    form = MoviesForm(
+    form = MedicinesForm(
         request.POST or None,
         instance=movie
     )
     if request.POST and form.is_valid():
         form.save()
-        return redirect('movies:home')
-    return render(request, 'movies/form.html', {'form': form})
+        return redirect('medicines:home')
+    return render(request, 'medicines/form.html', {'form': form})
 
 
 @login_required
 def movie_delete(request, **kwargs):
-    movie = Movies.objects.get(pk=kwargs.get('pk'))
+    movie = Medicines.objects.get(pk=kwargs.get('pk'))
     movie.delete()
-    return redirect('movies:home')
+    return redirect('medicines:home')
 
 
 @login_required
 def category_list(request):
     categories = Categories.objects.all()
-    return render(request, 'movies/category/category_list.html', {'categories': categories})
+    return render(request, 'medicines/category/category_list.html', {'categories': categories})

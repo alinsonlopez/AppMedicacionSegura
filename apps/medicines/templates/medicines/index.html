@@ -1,16 +1,16 @@
-{% extends 'movies/fragments/base.html' %}
+{% extends 'medicines/fragments/base.html' %}
 {% block main-content %}
     <div class="row">
         <div class="col s12">
-            <a class="waves-effect waves-light btn right red darken-1" href="{% url 'movies:movies-create' %}"><i
-                    class="material-icons left">add</i>Agregar nuevo</a>
+            <a class="waves-effect waves-light btn right red darken-1" href="{% url 'medicines:medicines-create' %}"><i
+                    class="material-icons left">add</i>Agregar nuevo medicamento</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            {% if not movies %}
+            {% if not medicines %}
                 <div class="card-panel red">
-                    <span class="white-text">No hay registros actualmente</span>
+                    <span class="white-text">No hay ningun medicamento actualmente</span>
                 </div>
             {% else %}
                 <table class="striped centered">
@@ -23,7 +23,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for movie in movies %}
+                    {% for movie in medicines %}
                         <tr>
                             <td width="20%">{{ movie.name }}</td>
                             <td>{{ movie.description | truncatechars:120 }}</td>

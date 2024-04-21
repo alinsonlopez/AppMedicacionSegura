@@ -27,20 +27,20 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Movies',
+            name='Medicines',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=150, verbose_name='Nombre')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('description', models.CharField(max_length=256, verbose_name='Descripcion')),
-                ('image', models.ImageField(upload_to='movies', verbose_name='Imagen')),
+                ('image', models.ImageField(upload_to='medicines', verbose_name='Imagen')),
                 ('release_date', models.DateField(verbose_name='Fecha de publicacion')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.Categories', verbose_name='Categoria')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='medicines.Categories', verbose_name='Categoria')),
             ],
             options={
                 'verbose_name': 'Pelicula',
-                'verbose_name_plural': 'Peliculas',
+                'verbose_name_plural': 'Medicamentos',
             },
         ),
     ]

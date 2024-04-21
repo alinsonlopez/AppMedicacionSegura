@@ -1,10 +1,10 @@
 from django import forms
-from .models import Movies
+from .models import Medicines
 
 
-class MoviesForm(forms.ModelForm):
+class MedicinesForm(forms.ModelForm):
     class Meta:
-        model = Movies
+        model = Medicines
         fields = '__all__'
 
 

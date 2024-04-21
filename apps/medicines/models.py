@@ -24,21 +24,21 @@ class Categories(BaseName):
         verbose_name_plural = 'Categorias'
 
 
-class Movies(BaseName):
+class Medicines(BaseName):
     description = models.CharField(max_length=256, verbose_name='Descripcion')
-    image = models.ImageField(upload_to='movies', verbose_name='Imagen')
+    image = models.ImageField(upload_to='medicines', verbose_name='Imagen')
     release_date = models.DateField(verbose_name='Fecha de publicacion')
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, verbose_name='Categoria')
 
     class Meta:
         verbose_name = 'Pelicula'
-        verbose_name_plural = 'Peliculas'
+        verbose_name_plural = 'Medicamentos'
 
     def get_edit_url(self):
-        return reverse_lazy('movies:movies-edit', kwargs={'pk': self.pk})
+        return reverse_lazy('medicines:medicines-edit', kwargs={'pk': self.pk})
 
     def get_delete_url(self):
-        return reverse_lazy('movies:movies-delete', kwargs={'pk': self.pk})
+        return reverse_lazy('medicines:medicines-delete', kwargs={'pk': self.pk})
 
     def get_detail_url(self):
-        return reverse_lazy('movies:movies-detail', kwargs={'pk': self.pk})
+        return reverse_lazy('medicines:medicines-detail', kwargs={'pk': self.pk})
